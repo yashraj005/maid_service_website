@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <a href="#"><i class="fa fa-envelope"></i> Welcome, <span id="user-email"></span></a>
+                </div>
+                <div class="col-lg-3 text-right">
+                    <a href="logout.php" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="container mt-5">
+        <h1>User Dashboard</h1>
+        <p>Hello, <strong><span id="display-email"></span></strong>! Welcome back to your dashboard.</p>
+
+        <!-- Placeholder for user profile -->
+        <section>
+            <h3>Your Profile</h3>
+            <ul>
+                <li><strong>Email:</strong> <span id="profile-email"></span></li>
+                <!-- Additional profile info could go here -->
+            </ul>
+        </section>
+    </div>
+
+    <!-- JavaScript to fetch session data from PHP -->
+    <script>
+        // Fetch the email from the session via a small PHP script
+        fetch('get_user_data.php')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('user-email').innerText = data.email;
+                document.getElementById('display-email').innerText = data.email;
+                document.getElementById('profile-email').innerText = data.email;
+            })
+            .catch(error => console.error('Error fetching user data:', error));
+    </script>
+</body>
+</html>
